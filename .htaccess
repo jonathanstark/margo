@@ -1,0 +1,4 @@
+# Pretty urls for blog
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !index
+RewriteRule ^(.*)$ .margo/index.php?filename=$1 [L]
