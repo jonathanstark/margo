@@ -37,6 +37,8 @@ Possible next steps:
 * Rename the `margo` folder to anything you want
 * Update the config options in `margo/.margo/index.php`
 * Dork around with the `.margo/template.php` file to fit your site structure
+* Remove the readme.md
+* Replace sample-post-one.mdown and sample-post-two.mdown with your own awesome posts
 
 Dependencies
 ----
