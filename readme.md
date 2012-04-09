@@ -1,7 +1,7 @@
 Margo: Static blogging with Markdown
 ====
 
-Margo shouldn't exist but I'm too lazy to blog in raw HTML. So, Margo converts my Markdown files (I love writing in Markdown) into HTML on the fly. 
+Margo shouldn't exist but I'm too lazy to blog in raw HTML. I prefer writing in Markdown, so I wrote Margo to convert my Markdown files into HTML on the fly. 
 
 Features
 ----
@@ -13,12 +13,14 @@ Margo is refreshingly feature-free. The core concept is that everything is a tex
 * You can edit on virtually any device. 
 * Things like Dropbox, github, or rsync become interesting. 
 
-There are only a couple files that matter:
+Files
+----
 
-* .margo/index.php to handle request for markdown files. 
-* .margo/markdown.php is a file I didn't write. 
-* .margo/template.php can be anywhere on your server and is where the converted HTML will be embedded. 
-* .htaccess gives you purty URLs. 
+There are only a few files that matter:
+
+* `.margo/index.php` - handles requests for Markdown files. 
+* `.margo/markdown.php` - PHP port of Perl Markdown converter (I didn't write this one). 
+* `.htaccess` - gives you purty URLs. 
 
 Usage
 ----
