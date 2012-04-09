@@ -1,7 +1,7 @@
-Margo - Static Blogging With Markdown
+Margo
 ====
 
-Margo shouldn't exist but I'm too lazy to blog in raw HTML. I prefer writing in Markdown, so I wrote Margo to convert my Markdown files into HTML on the fly. 
+Margo is a simple way to blog using static Markdown files. It really shouldn't exist but I'm too lazy to blog in raw HTML. I prefer writing in Markdown, so I wrote Margo to convert my Markdown files into HTML on the fly. 
 
 Features
 ----
@@ -44,4 +44,9 @@ Dependencies
 ----
 
 * PHP 4.0.5 or later
+
+Todos
+----
+* Add some kind of handling for top-level index of all posts
+* Add support for RSS
 
