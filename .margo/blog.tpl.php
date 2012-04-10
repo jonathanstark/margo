@@ -73,7 +73,7 @@
 <body>
     <header>
         <div class="container">
-            <h1><a href="./">Blog</a></h1>
+            <h1><a href="./"><?php echo $blog->title?></a></h1>
             <aside class="description"><?php echo $blog->description?></aside>
         </div>
     </header>
