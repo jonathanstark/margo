@@ -18,7 +18,6 @@
         "file_not_found_message":"./not_found.mdown",
         "blog_template_file":"./blog.tpl.php",
         "post_template_file":"./post.tpl.php",
-        "feed_item_template_file":"./feed_item.tpl.php",
         "display_errors":true
     }
 }
