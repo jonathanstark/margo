@@ -58,13 +58,20 @@ if ($filename==NULL) {
         ob_end_clean();
     }
     include_once $margo->blog_template_file;
-} else if ($filename == "rss") {
-    $rss = new FeedWriter(RSS2);
-    $rss->setTitle($blog->title);
-    $rss->setLink($blog->url);
-    $rss->setDescription($blog->description);
-    $rss->setChannelElement('language', $feeds->language);
-    $rss->setChannelElement('pubDate', date(DATE_RSS, time()));
+} else if ($filename == "rss" || $filename == "atom") {
+    ($filename=="rss") ? $feed = new FeedWriter(RSS2) : $feed = new FeedWriter(ATOM);
+
+    $feed->setTitle($blog->title);
+    $feed->setLink($blog->url);
+
+    if($filename=="rss") {
+        $feed->setDescription($blog->description);
+        $feed->setChannelElement('language', $feeds->language);
+        $feed->setChannelElement('pubDate', date(DATE_RSS, time()));
+    } else {
+        $feed->setChannelElement('author', $blog->author->name." - " . $blog->author->email);
+        $feed->setChannelElement('updated', date(DATE_RSS, time()));
+    }
 
     $posts = get_all_posts();
 
@@ -72,43 +79,21 @@ if ($filename==NULL) {
         $c=0;
         foreach($posts as $post) {
             if($c<$feeds->max_items) {
-                $item = $rss->createNewItem();
+                $item = $feed->createNewItem();
                 $item->setTitle($post['title']);
                 $item->setLink(rtrim($blog->url, '/').'/'.str_replace($margo->post_file_extension, "", $post['fname']));
                 $item->setDate($post['ftime']);
                 $item->setDescription(Markdown(file_get_contents(rtrim($margo->directory_of_posts, '/').'/'.$post['fname'])));
-                $item->addElement('author', $blog->author->name." - " . $blog->author->email);
-                $item->addElement('guid', rtrim($blog->url, '/').'/'.str_replace($margo->post_file_extension, "", $post['fname']));
-                $rss->addItem($item);
+                if($filename=="rss") {
+                    $item->addElement('author', $blog->author->name." - " . $blog->author->email);
+                    $item->addElement('guid', rtrim($blog->url, '/').'/'.str_replace($margo->post_file_extension, "", $post['fname']));
+                }
+                $feed->addItem($item);
                 $c++;
             }
         }
     }
-    $rss->genarateFeed();
-} else if ($filename == "atom") {
-    $atom = new FeedWriter(ATOM);
-    $atom->setTitle($blog->title);
-    $atom->setLink($blog->url);
-    $atom->setChannelElement('author', $blog->author->name." - " . $blog->author->email);
-    $atom->setChannelElement('updated', date(DATE_RSS, time()));
-
-    $posts = get_all_posts();
-
-    if($posts) {
-        $c=0;
-        foreach($posts as $post) {
-            if($c<$feeds->max_items) {
-                $item = $atom->createNewItem();
-                $item->setTitle($post['title']);
-                $item->setLink(rtrim($blog->url, '/').'/'.str_replace($margo->post_file_extension, "", $post['fname']));
-                $item->setDate($post['ftime']);
-                $item->setDescription(Markdown(file_get_contents(rtrim($margo->directory_of_posts, '/').'/'.$post['fname'])));
-                $atom->addItem($item);
-                $c++;
-            }
-        }
-    }
-    $atom->genarateFeed();
+    $feed->genarateFeed();
 } else {
     if (!file_exists($filename)) {
          ob_start();
