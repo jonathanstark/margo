@@ -1,4 +1,4 @@
-Margo
+About Margo
 ====
 
 Margo is a simple way to blog using static Markdown files. It really shouldn't exist but I'm too lazy to blog in raw HTML. I prefer writing in Markdown, so I wrote Margo to convert my Markdown files into HTML on the fly.
