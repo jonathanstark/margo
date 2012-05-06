@@ -1,8 +1,9 @@
 {
     "blog": {
         "title":"My Blog",
-        "url":"http://example.com/podcast/",
         "description":"Just another Margo blog",
+        "url":"http://example.com/podcast/",
+        "css":"http://example.com/css/styles.css",
         "author": {
             "name":"Jonathan Stark, Kelli Shaver",
             "email":"hello@example.com"
