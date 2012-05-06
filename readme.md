@@ -19,7 +19,7 @@ Files
 There are only two files that should need editing:
 
 * `margo/.htaccess` - gives you purty URLs
-* `margo/.margo_config.json` - the margo configuration file - contains various settings for your blog
+* `margo/.margo/config.json` - the margo configuration file - contains various settings for your blog
 
 Usage
 ----
@@ -35,12 +35,10 @@ Possible next steps:
 
 * Put the `margo` folder anywhere you want
 * Rename the `margo` folder to anything you want
-* Update the config options in `margo/.margo_config.json`
+* Update the config options in `margo/.margo/config.json`
 * Make your own templates for Margo
 * Remove the readme.md
 * Replace sample-post-one.mdown and sample-post-two.mdown with your own awesome posts
-
-**Note: All Margo file paths in `.margo_config.json` are relative to `margo/.margo/index.php`**
 
 Dependencies
 ----
