@@ -2,7 +2,7 @@
     "blog": {
         "title":"My Blog",
         "description":"Just another Margo blog",
-        "url":"http://example.com/podcast/",
+        "url":"http://example.com/podcast",
         "css":"http://example.com/css/styles.css",
         "author": {
             "name":"Jonathan Stark, Kelli Shaver",
