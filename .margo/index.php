@@ -1,35 +1,16 @@
 <?php
 
-$config = json_decode(file_get_contents('../.margo_config.json'));
-
+// Parse config
+// TODO: Check for missing config file
+$config = json_decode(file_get_contents('./config.json'));
 $blog = $config->blog;
 $margo = $config->margo;
 $feeds = $config->feeds;
 
 # Let's rock!
 ini_set('display_errors', $margo->display_errors);
-include_once './markdown.php';
-include_once './feedwriter.php';
-
-function get_all_posts() {
-    global $margo;
-    if($handle = opendir($margo->directory_of_posts)) {
-        $files = array();
-        $filetimes = array();
-        while (false !== ($entry = readdir($handle))) {
-            if(substr(strrchr($entry,'.'),1)==ltrim($margo->post_file_extension, '.')) {
-                $ftime = filectime($margo->directory_of_posts.$entry);
-                $fcontents = file($margo->directory_of_posts.$entry);
-                $files[] = array("ftime" => $ftime, "fname" => $entry, "title" => str_replace("#", "", $fcontents[0]));
-                $filetimes[] = $ftime;
-            }
-        }
-        array_multisort($filetimes, SORT_DESC, $files);
-        return $files;
-    } else {
-        return false;
-    }
-}
+include_once './plugins/feedwriter.php';
+include_once './plugins/markdown.php';
 
 if (empty($_GET['filename'])) {
     $filename = NULL;
@@ -45,16 +26,16 @@ if ($filename==NULL) {
         ob_start();
         $content = "";
         foreach($posts as $post) {
-            $content .= "* [{$post['title']}](".str_replace($margo->post_file_extension, '', $post['fname']).")\n";
+            $content .= "* [{$post['title']}](./".str_replace($margo->post_file_extension, '', $post['fname']).")\n";
         }
         echo Markdown($content);
         $body = ob_get_contents();
         ob_end_clean();
     } else {
         ob_start();
-            $post = Markdown(file_get_contents($margo->file_not_found_message));
-            include $margo->post_template_file;
-            $body = ob_get_contents();
+        $post = Markdown(file_get_contents($margo->{'404_template_file'}));
+        include $margo->post_template_file;
+        $body = ob_get_contents();
         ob_end_clean();
     }
     include_once $margo->blog_template_file;
@@ -95,18 +76,37 @@ if ($filename==NULL) {
     }
     $feed->genarateFeed();
 } else {
+    ob_start();
     if (!file_exists($filename)) {
-         ob_start();
-            $post = Markdown(file_get_contents($margo->file_not_found_message));
-            include $margo->post_template_file;
-            $body = ob_get_contents();
-        ob_end_clean();
+        include $margo->{'404_template_file'}; // Not allowed to start identifier with bare integer :|
     } else {
-        ob_start();
-            $post = Markdown(file_get_contents($filename));
-            include $margo->post_template_file;
-            $body = ob_get_contents();
-        ob_end_clean();
+        $post = Markdown(file_get_contents($filename));
+        include $margo->post_template_file;
     }
+    $body = ob_get_contents();
+    ob_end_clean();
     include_once $margo->blog_template_file;
+}
+
+function get_all_posts() {
+    global $margo;
+    // print_r($margo->directory_of_posts);die;
+    if($handle = opendir($margo->directory_of_posts)) {
+        $files = array();
+        $filetimes = array();
+        while (false !== ($entry = readdir($handle))) {
+            if(substr(strrchr($entry,'.'),1)==ltrim($margo->post_file_extension, '.')) {
+                $ftime = filectime($margo->directory_of_posts.$entry);
+                $fcontents = file($margo->directory_of_posts.$entry);
+                $title = str_replace("#", "", $fcontents[0]);
+                $files[] = array("ftime" => $ftime, "fname" => $entry, "title" => $title);
+                $filetimes[] = $ftime;
+                $titles[] = $title;
+            }
+        }
+        array_multisort($titles, SORT_DESC, $files);
+        return $files;
+    } else {
+        return false;
+    }
 }
