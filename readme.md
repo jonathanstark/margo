@@ -6,7 +6,9 @@ Margo is a simple way to blog using static Markdown files. It really shouldn't e
 Features
 ----
 
-Margo is refreshingly feature-free. The core concept is that everything is a text file. There are some serious advantages to this:
+Margo is refreshingly feature-free. Put the directory on your site and create Markdown files in it. Poof! Yer blogging :) 
+
+The core concept is that everything is a text file. There are some serious advantages to this:
 
 * You can use whatever editor you want
 * There is no db to set up
@@ -16,17 +18,16 @@ Margo is refreshingly feature-free. The core concept is that everything is a tex
 Files
 ----
 
-There are only two files that should need editing:
+There is only one file that you need to edit:
 
-* `margo/.htaccess` - gives you purty URLs
-* `margo/.margo/config.json` - the margo configuration file - contains various settings for your blog
+* `margo/.margo/config.json` - contains various settings for your blog
 
 Usage
 ----
 
 Here's the easiest possible setup:
 
-1. Place the parent `margo` directory in webroot directory of your web server
+1. Place the parent `margo` directory in the webroot directory of your web server
 1. Visit `http://yousite.com/margo/sample-post-one` in your web browser
 
 You should see the sample post appear.
