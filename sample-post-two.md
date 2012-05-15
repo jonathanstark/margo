@@ -1,8 +1,8 @@
 This Is My Second Sample Post
 ====
-Mon Apr  10 01:21:59 EDT 2012
+Thu May 10 12:00:00 EDT 2012
 
-This is a sample post. 
+This is a sample post.
 
 * It's awesome
 * And cool

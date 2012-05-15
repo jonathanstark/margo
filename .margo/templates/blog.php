@@ -17,13 +17,19 @@
                 text-align: center;
             }
             a {
-                color: darkmagenta;
+                color: #8B008B;
                 font-weight: bold;
                 text-decoration: none;
             }
             a:hover {
                 color: white;
-                background-color: darkmagenta;
+                background-color: #8B008B;
+            }
+            pre {
+                overflow-x:scroll;
+                background:#eee;
+                border:1px solid #ddd;
+                padding:0.25em;
             }
             #wrapper {
                 background-color: #ccc;
@@ -50,7 +56,7 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <h1><a href="<?php echo $blog->url ?>"><?php echo $blog->title ?></a></h1>
+                <h1><a href="./"><?php echo $blog->title ?></a></h1>
                 <p><?php echo $blog->description ?></p>
             </div>
             <div id="content">
@@ -59,7 +65,7 @@
                 </div>
             </div>
             <div id="footer">
-                &copy; Yada yada yada
+                &copy; <?=$blog->title?> | <a href="./rss">RSS</a>
             </div>
         </div>
     </body>
