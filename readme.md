@@ -29,7 +29,7 @@ Usage
 Here's the easiest possible setup:
 
 1. Place the parent `margo` directory in the webroot directory of your web server
-1. Visit `http://yousite.com/margo/` in your web browser
+1. Visit `http://yoursite.com/margo/` in your web browser
 
 You should see the sample posts appear.
 
