@@ -2,11 +2,12 @@
     "blog": {
         "title":"My Blog",
         "description":"Just another Margo blog",
-        "url":"http://example.com/podcast",
+        "url":"http://example.com/margo",
         "author": {
             "name":"Jonathan Stark, Kelli Shaver",
             "email":"hello@example.com"
-        }
+        },
+        "date_format":"m/d/Y \\a\\t g:ia"
     },
     "feeds": {
         "language":"en-us",

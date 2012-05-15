@@ -26,7 +26,7 @@ if ($filename==NULL) {
         ob_start();
         $content = "";
         foreach($posts as $post) {
-            $content .= "* [{$post['title']}](./".str_replace($margo->post_file_extension, '', $post['fname']).")\n";
+            $content .= "* [{$post['title']}](./".str_replace($margo->post_file_extension, '', $post['fname']).") - ".date($blog->date_format, $post['time'])." \n";
         }
         echo Markdown($content);
         $body = ob_get_contents();
@@ -63,7 +63,7 @@ if ($filename==NULL) {
                 $item = $feed->createNewItem();
                 $item->setTitle($post['title']);
                 $item->setLink(rtrim($blog->url, '/').'/'.str_replace($margo->post_file_extension, "", $post['fname']));
-                $item->setDate($post['ftime']);
+                $item->setDate($post['time']);
                 $item->setDescription(Markdown(file_get_contents(rtrim($margo->directory_of_posts, '/').'/'.$post['fname'])));
                 if($filename=="rss") {
                     $item->addElement('author', $blog->author->name." - " . $blog->author->email);
@@ -96,15 +96,15 @@ function get_all_posts() {
         $filetimes = array();
         while (false !== ($entry = readdir($handle))) {
             if(substr(strrchr($entry,'.'),1)==ltrim($margo->post_file_extension, '.')) {
-                $ftime = filectime($margo->directory_of_posts.$entry);
                 $fcontents = file($margo->directory_of_posts.$entry);
                 $title = str_replace("#", "", $fcontents[0]);
-                $files[] = array("ftime" => $ftime, "fname" => $entry, "title" => $title);
-                $filetimes[] = $ftime;
+                $time = strtotime($fcontents[2]);
+                $files[] = array("time" => $time, "fname" => $entry, "title" => $title);
+                $filetimes[] = $time;
                 $titles[] = $title;
             }
         }
-        array_multisort($titles, SORT_DESC, $files);
+        array_multisort($filetimes, SORT_DESC, $files);
         return $files;
     } else {
         return false;
