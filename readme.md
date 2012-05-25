@@ -1,6 +1,6 @@
 About Margo
 ====
-Tue May 15 11:59:17 EDT 2012
+Fri May 25 13:12:23 EDT 2012
 
 Margo is a simple way to blog using static Markdown files. It really shouldn't exist but I'm too lazy to blog in raw HTML. I prefer writing in Markdown, so I wrote Margo to convert my Markdown files into HTML on the fly.
 

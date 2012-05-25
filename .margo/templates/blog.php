@@ -31,6 +31,12 @@
                 border:1px solid #ddd;
                 padding:0.25em;
             }
+            time {
+                color:#999;
+                font-style:italic;
+                display:block;
+                margin-bottom:1em;
+            }
             #wrapper {
                 background-color: #ccc;
                 max-width: 37.5em;
