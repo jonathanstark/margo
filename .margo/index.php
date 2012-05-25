@@ -80,7 +80,9 @@ if ($filename==NULL) {
     if (!file_exists($filename)) {
         include $margo->{'404_template_file'}; // Not allowed to start identifier with bare integer :|
     } else {
-        $post = Markdown(file_get_contents($filename));
+        $fcontents = file($filename);
+        $fcontents[2] = str_replace($fcontents[2], "<time>".trim($fcontents[2])."</time>", $fcontents[2]);
+        $post = Markdown(join('', $fcontents));
         include $margo->post_template_file;
     }
     $body = ob_get_contents();
