@@ -60,7 +60,7 @@ Dependencies
 Nginx Configuration
 ----
 
-Margo ships with a default .htaccess file for URL rewriting with Apache. Below is an exmaple configuration for Ngonx - You'll need to change paths accordingly.
+Margo ships with a default .htaccess file for URL rewriting with Apache. Below is an example configuration for Ngonx - You'll need to change paths accordingly.
 
     # Inside your virtualhost block:
     location ~ ^/margo{
